@@ -1,0 +1,20 @@
+project_id = "tgjohfjguqkpiqmosmgd"
+
+[api]
+port = 54321
+external_url = "https://tgjohfjguqkpiqmosmgd.supabase.co"
+
+[db]
+port = 54322
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "freshplan://login-callback"
+additional_redirect_urls = ["freshplan://login-callback", "freshplan://reset-password"]
+
+[edge_runtime]
+enabled = true
+policy_path = "supabase/functions"
