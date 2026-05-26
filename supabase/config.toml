@@ -14,7 +14,3 @@ enabled = true
 enabled = true
 site_url = "freshplan://login-callback"
 additional_redirect_urls = ["freshplan://login-callback", "freshplan://reset-password"]
-
-[edge_runtime]
-enabled = true
-policy_path = "supabase/functions"
