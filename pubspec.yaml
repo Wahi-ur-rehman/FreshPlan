@@ -1,0 +1,94 @@
+name: freshplan
+description: AI-Powered Meal Planning & Pantry Management — Production App
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: '>=3.16.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ─── Backend / Auth ────────────────────────────────────────────────────────
+  supabase_flutter: ^2.5.6        # Auth + DB + Realtime + Storage
+
+  # ─── State Management ─────────────────────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ─── Navigation ───────────────────────────────────────────────────────────
+  go_router: ^14.1.4
+
+  # ─── Security ─────────────────────────────────────────────────────────────
+  flutter_secure_storage: ^9.2.2  # Encrypted keychain/keystore token storage
+  local_auth: ^2.3.0              # Biometric authentication
+  crypto: ^3.0.3                  # SHA-256 hashing & HMAC
+  encrypt: ^5.0.3                 # AES encryption for local data
+
+  # ─── Network ──────────────────────────────────────────────────────────────
+  dio: ^5.6.0                     # HTTP client with interceptors
+  connectivity_plus: ^6.0.5       # Network state monitoring
+
+  # ─── AI ───────────────────────────────────────────────────────────────────
+  google_generative_ai: ^0.4.6    # Gemini AI (via Edge Function proxy)
+
+  # ─── Notifications ────────────────────────────────────────────────────────
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.4
+
+  # ─── UI Components ────────────────────────────────────────────────────────
+  fl_chart: ^0.68.0               # Analytics charts
+  cached_network_image: ^3.4.1    # Cached image loading
+  shimmer: ^3.0.0                 # Skeleton loading screens
+  flutter_slidable: ^3.1.1        # Swipe-to-delete list items
+  flutter_animate: ^4.5.0         # Smooth UI animations
+  gap: ^3.0.1                     # Spacing widget
+
+  # ─── Forms & Validation ───────────────────────────────────────────────────
+  flutter_form_builder: ^9.3.0
+  form_builder_validators: ^10.0.1
+
+  # ─── Image / Media ────────────────────────────────────────────────────────
+  image_picker: ^1.1.2
+  flutter_svg: ^2.0.10+1
+
+  # ─── Utilities ────────────────────────────────────────────────────────────
+  uuid: ^4.4.2
+  intl: ^0.19.0
+  shared_preferences: ^2.3.2
+  path_provider: ^2.1.4
+  package_info_plus: ^8.1.0
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.0
+  share_plus: ^10.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.4.3
+  json_serializable: ^6.8.0
+  freezed: ^2.5.7
+  freezed_annotation: ^2.4.4
+  mockito: ^5.4.4
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700

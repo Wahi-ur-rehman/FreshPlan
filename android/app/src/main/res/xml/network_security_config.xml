@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  network_security_config.xml
+  ────────────────────────────────────────────────────────────────────────────
+  Security hardening:
+    • No cleartext traffic to ANY domain (forces HTTPS everywhere)
+    • Certificate pinning for Supabase (replace SHA-256 with your actual cert)
+    • Trust only system CAs — no user-installed CAs (prevents MitM attacks)
+  ────────────────────────────────────────────────────────────────────────────
+-->
+<network-security-config>
+
+    <!-- Default: trust ONLY system CAs, no user-installed certs -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- Do NOT add <certificates src="user" /> — user CAs enable MitM -->
+        </trust-anchors>
+    </base-config>
+
+    <!-- Supabase API — also no cleartext allowed -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">supabase.co</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+        <!--
+        OPTIONAL: Certificate pinning (uncomment and set your cert hash).
+        Get hash with:
+          openssl s_client -connect YOUR_PROJECT.supabase.co:443 < /dev/null 2>/dev/null \
+            | openssl x509 -pubkey -noout | openssl pkey -pubin -outform DER \
+            | openssl dgst -sha256 -binary | base64
+
+        <pin-set expiration="2026-12-31">
+            <pin digest="SHA-256">REPLACE_WITH_YOUR_SUPABASE_CERT_HASH=</pin>
+            <pin digest="SHA-256">REPLACE_WITH_BACKUP_CERT_HASH=</pin>
+        </pin-set>
+        -->
+    </domain-config>
+
+    <!-- Gemini API (via Edge Function — still supabase.co domain) -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">googleapis.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+</network-security-config>

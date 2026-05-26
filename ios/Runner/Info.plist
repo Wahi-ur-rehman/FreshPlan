@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Info.plist — iOS Security & Privacy Configuration
+  ──────────────────────────────────────────────────────────────────────────
+  Security features:
+    • NSAppTransportSecurity: forces HTTPS (no cleartext HTTP allowed)
+    • NSFaceIDUsageDescription: required for biometric auth
+    • Privacy permission strings for App Store review
+    • URL scheme registered for Supabase OAuth deep-link callbacks
+  ──────────────────────────────────────────────────────────────────────────
+-->
+<plist version="1.0">
+<dict>
+    <!-- ── App Identity ────────────────────────────────────────────── -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>FreshPlan</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>freshplan</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+
+    <!-- ── Network Security: Enforce HTTPS ─────────────────────────── -->
+    <!-- No cleartext HTTP allowed anywhere -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+        <!-- Supabase — HTTPS only, forward secrecy required -->
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>supabase.co</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <true/>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <false/>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- ── Privacy Permissions ──────────────────────────────────────── -->
+    <!-- Camera: for scanning barcodes and item photos -->
+    <key>NSCameraUsageDescription</key>
+    <string>FreshPlan uses your camera to photograph pantry items and scan barcodes.</string>
+
+    <!-- Photo Library -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>FreshPlan can save recipe photos to your photo library.</string>
+
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>FreshPlan saves recipe images to your photo library.</string>
+
+    <!-- Face ID / Touch ID for app lock -->
+    <key>NSFaceIDUsageDescription</key>
+    <string>FreshPlan uses Face ID to quickly unlock the app and protect your pantry data.</string>
+
+    <!-- Local Network (if using local integrations) -->
+    <!-- <key>NSLocalNetworkUsageDescription</key>
+    <string>FreshPlan uses your local network to sync with smart home devices.</string> -->
+
+    <!-- ── URL Schemes (Supabase OAuth deep links) ─────────────────── -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>freshplan.auth</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <!-- Must match redirectTo in auth calls: freshplan://login-callback -->
+                <string>freshplan</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- ── Flutter ──────────────────────────────────────────────────── -->
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <!-- ── App Tracking Transparency (required iOS 14+) ─────────────── -->
+    <!-- We do NOT track users, so we don't need NSUserTrackingUsageDescription -->
+
+    <!-- ── Background Modes (for notifications) ─────────────────────── -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+</dict>
+</plist>

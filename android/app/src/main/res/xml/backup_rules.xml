@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  backup_rules.xml  (Android 11 and below)
+  ─────────────────────────────────────────
+  Exclude all sensitive files from cloud backup.
+  SharedPreferences, databases, and token files are never backed up.
+-->
+<full-backup-content>
+    <!-- Exclude ALL shared preferences (may contain session tokens) -->
+    <exclude domain="sharedpref" path="." />
+
+    <!-- Exclude SQLite databases -->
+    <exclude domain="database" path="." />
+
+    <!-- Exclude Flutter secure storage -->
+    <exclude domain="file" path="flutter_secure_storage" />
+
+    <!-- Exclude cached data -->
+    <exclude domain="cache" path="." />
+    <exclude domain="external-cache" path="." />
+</full-backup-content>

@@ -1,0 +1,20 @@
+{
+  "name": "freshplan",
+  "version": "1.0.0",
+  "description": "> AI-powered pantry management & meal planning with enterprise-grade security.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "@supabase/cli-windows-x64": "^2.101.0",
+    "supabase": "^2.101.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
